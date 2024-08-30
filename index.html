@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bestill time – test</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .booking-container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .booking-container img {
+            max-width: 200px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-container">
+        <h1>Bestill time</h1>
+        <p>Klikk knappen for å bestille time.</p>
+        <a id="Setmore_button_iframe" href="https://booking.setmore.com/scheduleappointment/6d124e78-3ecb-4363-aead-5c1d6723a7b0">
+            <img src="https://assets.setmore.com/setmore/images/2.0/Settings/book-now-black.svg" alt="Bestill time"/>
+        </a>
+    </div>
+
+    <script id="setmore_script" type="text/javascript" src="https://storage.googleapis.com/fullintegration-live/webComponentAppListing/Container/setmoreIframeLive.js"></script>
+</body>
+</html>
