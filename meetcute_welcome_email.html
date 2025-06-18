@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velkommen til MeetCute!</title>
+    <style>
+        /* Email client compatibility styles */
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f8f9fa; }
+        table { border-spacing: 0; }
+        td { padding: 0; }
+        img { border: 0; display: block; }
+
+        /* Main container styles */
+        .wrapper { width: 100%; table-layout: fixed; background-color: #f8f9fa; }
+        .main { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 600px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+        /* Header styles */
+        .header { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; text-align: center; padding: 40px 20px; border-radius: 8px 8px 0 0; }
+        .header h1 { margin: 0; font-size: 28px; font-weight: 700; line-height: 1.2; }
+        .header p { margin: 15px 0 0 0; font-size: 18px; opacity: 0.9; }
+
+        /* Content styles */
+        .content { padding: 40px 30px; line-height: 1.6; color: #374151; }
+        .content h2 { color: #1f2937; font-size: 24px; margin: 0 0 20px 0; font-weight: 600; }
+        .content p { margin: 0 0 20px 0; font-size: 16px; }
+
+        /* Button styles */
+        .cta-button { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 16px 32px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; display: inline-block; text-align: center; margin: 20px 0; transition: all 0.3s ease; }
+        .cta-button:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(99,102,241,0.3); }
+
+        /* Feature list styles */
+        .feature-list { margin: 30px 0; }
+        .feature-item { margin: 15px 0; padding: 0; display: flex; align-items: flex-start; }
+        .feature-icon { width: 24px; height: 24px; margin-right: 15px; margin-top: 2px; }
+        .feature-text { flex: 1; }
+
+        /* Footer styles */
+        .footer { background-color: #f9fafb; padding: 30px; text-align: center; font-size: 14px; color: #6b7280; border-radius: 0 0 8px 8px; }
+        .footer a { color: #6366f1; text-decoration: none; }
+
+        /* Responsive styles */
+        @media only screen and (max-width: 600px) {
+            .main { width: 100% !important; margin: 0 !important; border-radius: 0 !important; }
+            .header { padding: 30px 20px !important; border-radius: 0 !important; }
+            .header h1 { font-size: 24px !important; }
+            .header p { font-size: 16px !important; }
+            .content { padding: 30px 20px !important; }
+            .content h2 { font-size: 20px !important; }
+            .cta-button { padding: 14px 24px !important; font-size: 15px !important; }
+            .footer { padding: 20px !important; border-radius: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hidden preheader text -->
+    <div style="display: none; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: transparent;">
+        Velkommen til MeetCute! La oss bli bedre kjent med deg og dine ønsker for å finne de perfekte aktivitetene.
+    </div>
+
+    <!-- Main wrapper -->
+    <table class="wrapper" role="presentation">
+        <tr>
+            <td align="center">
+                <!-- Main container -->
+                <table class="main" role="presentation">
+                    <!-- Header -->
+                    <tr>
+                        <td class="header">
+                            <h1>Velkommen til MeetCute! 💜</h1>
+                            <p>Slutt å sveipe. Begynn å leve.</p>
+                        </td>
+                    </tr>
+
+                    <!-- Main content -->
+                    <tr>
+                        <td class="content">
+                            <h2>Hei og velkommen!</h2>
+
+                            <p>Vi er så glade for at du har valgt å bli med i MeetCute-familien! Du har tatt det første steget mot å møte fantastiske mennesker gjennom autentiske opplevelser.</p>
+
+                            <p>På MeetCute tror vi på ekte møter – ikke overfladiske profiler eller endeløs sweiping. Her får du muligheten til å være deg selv og finne kjemi gjennom felles interesser og meningsfulle aktiviteter.</p>
+
+                            <!-- Features -->
+                            <div class="feature-list">
+                                <div class="feature-item">
+                                    <div style="color: #6366f1; font-size: 20px; margin-right: 15px;">🍽️</div>
+                                    <div class="feature-text">
+                                        <strong>God mat og drikke</strong><br>
+                                        Oppdag nye smaker mens du blir kjent med nye mennesker
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div style="color: #6366f1; font-size: 20px; margin-right: 15px;">🏃‍♀️</div>
+                                    <div class="feature-text">
+                                        <strong>Sport & konkurranser</strong><br>
+                                        Aktive opplevelser for de spreke og sporty
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div style="color: #6366f1; font-size: 20px; margin-right: 15px;">🌿</div>
+                                    <div class="feature-text">
+                                        <strong>Naturopplevelser</strong><br>
+                                        Del vakre og magiske øyeblikk i Norges natur
+                                    </div>
+                                </div>
+
+                                <div class="feature-item">
+                                    <div style="color: #6366f1; font-size: 20px; margin-right: 15px;">🎨</div>
+                                    <div class="feature-text">
+                                        <strong>Kunst & Kultur</strong><br>
+                                        Møt noen som deler dine interesser og din smak
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>La oss bli bedre kjent!</h2>
+
+                            <p>For at vi skal kunne tipse deg om de perfekte aktivitetene som matcher dine interesser og preferanser, trenger vi å vite litt mer om deg. Det tar bare noen få minutter å fylle ut, og det hjelper oss å skape de beste opplevelsene for deg.</p>
+
+                            <!-- CTA Button -->
+                            <table role="presentation" style="margin: 30px 0;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="[FORM_URL_PLACEHOLDER]" class="cta-button" style="color: white; text-decoration: none;">
+                                            Fortell oss om deg selv ✨
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <p>Når du har fylt ut skjemaet, vil vi sende deg personlige invitasjoner til arrangementer som passer perfekt for deg. Vi arrangerer stadig nye opplevelser med små, intime grupper (normalt 12-20 personer) i kompatibel alder og med delte interesser.</p>
+
+                            <p><strong>Husk:</strong> Vi lover ikke at du møter flammen i ditt liv på hvert arrangement, men vi lover deg gode opplevelser med single mennesker du trives å være sammen med. Vi forbereder jorden slik at romantikken kan blomstre på egen hånd. 💕</p>
+
+                            <p>Ser frem til å møte deg snart!</p>
+
+                            <p style="margin-top: 30px;">
+                                Vennlig hilsen,<br>
+                                <strong>MeetCute-teamet</strong>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td class="footer">
+                            <p><strong>MeetCute.me</strong><br>
+                            Ekte møter for ekte mennesker</p>
+
+                            <p style="margin: 20px 0;">
+                                <a href="https://meetcute.me" style="color: #6366f1;">Besøk vår nettside</a> |
+                                <a href="mailto:hei@meetcute.me" style="color: #6366f1;">Kontakt oss</a>
+                            </p>
+
+                            <p style="font-size: 12px; color: #9ca3af; margin-top: 20px;">
+                                Du mottar denne e-posten fordi du registrerte deg på MeetCute.me.<br>
+                                <a href="[UNSUBSCRIBE_URL]" style="color: #9ca3af;">Avmeld deg her</a> hvis du ikke lenger ønsker å motta e-post fra oss.
+                            </p>
+
+                            <p style="font-size: 12px; color: #9ca3af; margin-top: 15px;">
+                                © 2025 MeetCute. Alle rettigheter forbeholdt.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
