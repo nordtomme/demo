@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- NOTE: This is just proof of concept. The RTF export doesn't preserve Norwegian letters, like æ, ø and å, and the DOCX export doesn't preserve formatting. At least not when opened in Pages. -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quill Editor - Multiple Export Formats</title>
+    
+    <!-- Quill Bubble Theme CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        #editor-container {
+            min-height: 300px;
+            border: 2px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .export-buttons {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .export-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .export-btn:hover {
+            background-color: #45a049;
+        }
+        #markdown-output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quill Editor - Multiple Export Formats</h1>
+    <p>Select text to see the formatting toolbar appear:</p>
+    
+    <div id="editor-container">
+        <p>Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis <em>nostrud exercitation</em> ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse <span class="highlight">cillum dolore eu fugiat</span> nulla pariatur. Excepteur sint occaecat <strong><em>cupidatat non proident</em></strong>, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+        <p>Sed ut perspiciatis unde omnis iste natus error sit <u>voluptatem accusantium</u> doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi <strong>architecto beatae vitae</strong> dicta sunt explicabo.</p>
+    </div>
+
+    <div class="export-buttons">
+        <button class="export-btn" onclick="exportToMarkdown()">Export to Markdown</button>
+        <button class="export-btn" onclick="exportToPDF()">Export to PDF</button>
+        <button class="export-btn" onclick="exportToDOCX()">Export to DOCX</button>
+        <button class="export-btn" onclick="exportToRTF()">Export to RTF</button>
+    </div>
+    
+    <div id="markdown-output"></div>
+
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
+    <!-- Turndown (HTML to Markdown converter) -->
+    <script src="https://cdn.jsdelivr.net/npm/turndown@7.1.2/dist/turndown.min.js"></script>
+    
+    <!-- jsPDF (PDF generation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- html2pdf (HTML to PDF with better formatting) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- docx (DOCX generation) -->
+    <script src="https://unpkg.com/docx@7.8.2/build/index.js"></script>
+    
+    <!-- FileSaver (for downloading files) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <script>
+        var quill = new Quill('#editor-container', {
+            theme: 'bubble'
+        });
+
+        var turndownService = new TurndownService({
+            headingStyle: 'atx',
+            codeBlockStyle: 'fenced'
+        });
+
+        // Markdown Export
+        function exportToMarkdown() {
+            var html = quill.root.innerHTML;
+            var markdown = turndownService.turndown(html);
+            
+            var outputDiv = document.getElementById('markdown-output');
+            outputDiv.textContent = markdown;
+            outputDiv.style.display = 'block';
+            
+            // Download as file
+            var blob = new Blob([markdown], { type: 'text/markdown' });
+            saveAs(blob, 'document.md');
+        }
+
+        // PDF Export
+        function exportToPDF() {
+            var element = quill.root;
+            var opt = {
+                margin: 1,
+                filename: 'document.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+        }
+
+        // DOCX Export
+        async function exportToDOCX() {
+            const { Document, Packer, Paragraph, TextRun } = docx;
+            
+            // Get plain text content (basic conversion)
+            var text = quill.getText();
+            
+            // Create a simple document
+            const doc = new Document({
+                sections: [{
+                    properties: {},
+                    children: text.split('\n').filter(line => line.trim()).map(line => 
+                        new Paragraph({
+                            children: [new TextRun(line)]
+                        })
+                    )
+                }]
+            });
+
+            // Generate and download
+            const blob = await Packer.toBlob(doc);
+            saveAs(blob, 'document.docx');
+        }
+
+        // RTF Export
+        function exportToRTF() {
+            // Get HTML content
+            var html = quill.root.innerHTML;
+            
+            // Basic HTML to RTF conversion
+            var rtf = htmlToRTF(html);
+            
+            // Download as file
+            var blob = new Blob([rtf], { type: 'application/rtf' });
+            saveAs(blob, 'document.rtf');
+        }
+
+        // Simple HTML to RTF converter
+        function htmlToRTF(html) {
+            // RTF header
+            var rtf = '{\\rtf1\\ansi\\deff0 {\\fonttbl {\\f0 Times New Roman;}}\\f0\\fs24 ';
+            
+            // Remove HTML tags and convert basic formatting
+            var text = html
+                .replace(/<strong>(.*?)<\/strong>/g, '{\\b $1}')
+                .replace(/<b>(.*?)<\/b>/g, '{\\b $1}')
+                .replace(/<em>(.*?)<\/em>/g, '{\\i $1}')
+                .replace(/<i>(.*?)<\/i>/g, '{\\i $1}')
+                .replace(/<u>(.*?)<\/u>/g, '{\\ul $1}')
+                .replace(/<p>/g, '')
+                .replace(/<\/p>/g, '\\par ')
+                .replace(/<br>/g, '\\line ')
+                .replace(/<[^>]+>/g, ''); // Remove remaining HTML tags
+            
+            rtf += text;
+            rtf += '}';
+            
+            return rtf;
+        }
+    </script>
+</body>
+</html>

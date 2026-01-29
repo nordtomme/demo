@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quill Editor - Bubble Theme with Markdown Export</title>
+    
+    <!-- Quill Bubble Theme CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        #editor-container {
+            min-height: 300px;
+            border: 2px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        .export-btn {
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .export-btn:hover {
+            background-color: #45a049;
+        }
+        #markdown-output {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quill Editor - Bubble Theme with Markdown Export</h1>
+    <p>Select text to see the formatting toolbar appear:</p>
+    
+    <div id="editor-container">
+        <p>Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis <em>nostrud exercitation</em> ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse <span class="highlight">cillum dolore eu fugiat</span> nulla pariatur. Excepteur sint occaecat <strong><em>cupidatat non proident</em></strong>, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+        <p>Sed ut perspiciatis unde omnis iste natus error sit <u>voluptatem accusantium</u> doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi <strong>architecto beatae vitae</strong> dicta sunt explicabo.</p>
+    </div>
+
+    <button class="export-btn" onclick="exportToMarkdown()">Export to Markdown</button>
+    
+    <div id="markdown-output"></div>
+
+    <!-- Quill JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
+    <!-- Turndown (HTML to Markdown converter) -->
+    <script src="https://cdn.jsdelivr.net/npm/turndown@7.1.2/dist/turndown.min.js"></script>
+    
+    <script>
+        var quill = new Quill('#editor-container', {
+            theme: 'bubble'
+        });
+
+        var turndownService = new TurndownService({
+            headingStyle: 'atx',
+            codeBlockStyle: 'fenced'
+        });
+
+        function exportToMarkdown() {
+            // Get HTML content from Quill
+            var html = quill.root.innerHTML;
+            
+            // Convert to Markdown
+            var markdown = turndownService.turndown(html);
+            
+            // Display the markdown
+            var outputDiv = document.getElementById('markdown-output');
+            outputDiv.textContent = markdown;
+            outputDiv.style.display = 'block';
+            
+            // Also log to console
+            console.log('Markdown output:');
+            console.log(markdown);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContentEditable Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .editable-box {
+            border: 2px solid #ccc;
+            padding: 20px;
+            min-height: 200px;
+            background-color: #f9f9f9;
+            line-height: 1.6;
+        }
+        .editable-box:focus {
+            outline: 2px solid #4CAF50;
+            background-color: white;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>ContentEditable Test</h1>
+    <p>Click inside the box below to edit the text:</p>
+    
+    <div class="editable-box" contenteditable="true" role="textbox" aria-label="Editable text area">
+        <p>Lorem ipsum dolor sit amet, <strong>consectetur adipiscing elit</strong>. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis <em>nostrud exercitation</em> ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse <span class="highlight">cillum dolore eu fugiat</span> nulla pariatur. Excepteur sint occaecat <strong><em>cupidatat non proident</em></strong>, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        
+        <p>Sed ut perspiciatis unde omnis iste natus error sit <u>voluptatem accusantium</u> doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi <strong>architecto beatae vitae</strong> dicta sunt explicabo.</p>
+    </div>
+</body>
+</html>
